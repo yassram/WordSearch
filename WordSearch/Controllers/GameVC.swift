@@ -20,6 +20,7 @@ class GameVC: UIViewController {
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.clipsToBounds = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isUserInteractionEnabled = false
 
@@ -50,10 +51,16 @@ class GameVC: UIViewController {
     func setupViews() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .white
-        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor).isActive = true
+        collectionView.layoutIfNeeded()
+        let spacingX = collectionView.bounds.width - floor(collectionView.bounds.width / CGFloat(collumnNumber)) * CGFloat(collumnNumber)
+        let spacingY = collectionView.bounds.height - floor(collectionView.bounds.height / CGFloat(lineNumber)) * CGFloat(lineNumber)
+        collectionView.contentInset = UIEdgeInsets(top: spacingY / 2, left: spacingX / 2, bottom: spacingY / 2, right: spacingX / 2)
+        collectionView.reloadData()
+        print(spacingX, spacingY)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {

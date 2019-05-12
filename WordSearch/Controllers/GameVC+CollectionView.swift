@@ -19,8 +19,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: lettreCellIdentifier, for: indexPath) as! LetterCollectionViewCell
-
-        cell.backgroundColor = .white
+        cell.backgroundColor = .clear
         if logicPositioning.isInRange(index: indexPath.item, start: startSelected, end: endSelected) {
             cell.backgroundColor = .orange
         }
@@ -34,8 +33,8 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        let w = collectionView.bounds.width / CGFloat(collumnNumber)
-        let h = collectionView.bounds.height / CGFloat(lineNumber)
+        let w = floor(collectionView.bounds.width / CGFloat(collumnNumber))
+        let h = floor(collectionView.bounds.height / CGFloat(lineNumber))
         return CGSize(width: w, height: h)
     }
 
