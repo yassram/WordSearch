@@ -11,6 +11,7 @@
 		FBEEEFCE2287965400E7F29A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBEEEFCD2287965400E7F29A /* Assets.xcassets */; };
 		FBEEEFD12287965400E7F29A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBEEEFCF2287965400E7F29A /* LaunchScreen.storyboard */; };
 		FBEEEFD92287981F00E7F29A /* GameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFD82287981F00E7F29A /* GameVC.swift */; };
+		FBEEEFDC22879FF500E7F29A /* GameVC+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFDB22879FF500E7F29A /* GameVC+CollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		FBEEEFD02287965400E7F29A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FBEEEFD22287965400E7F29A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBEEEFD82287981F00E7F29A /* GameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVC.swift; sourceTree = "<group>"; };
+		FBEEEFDB22879FF500E7F29A /* GameVC+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameVC+CollectionView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEEEFC62287965100E7F29A /* AppDelegate.swift */,
+				FBEEEFDD2287B6EC00E7F29A /* Views */,
 				FBEEEFDA2287999E00E7F29A /* Controllers */,
 				FBEEEFCD2287965400E7F29A /* Assets.xcassets */,
 				FBEEEFCF2287965400E7F29A /* LaunchScreen.storyboard */,
@@ -65,8 +68,24 @@
 			isa = PBXGroup;
 			children = (
 				FBEEEFD82287981F00E7F29A /* GameVC.swift */,
+				FBEEEFDB22879FF500E7F29A /* GameVC+CollectionView.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FBEEEFDD2287B6EC00E7F29A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FBEEEFDE2287B6F700E7F29A /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FBEEEFDE2287B6F700E7F29A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBEEEFD92287981F00E7F29A /* GameVC.swift in Sources */,
+				FBEEEFDC22879FF500E7F29A /* GameVC+CollectionView.swift in Sources */,
 				FBEEEFC72287965100E7F29A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
