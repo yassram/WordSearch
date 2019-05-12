@@ -11,11 +11,14 @@ import UIKit
 class GameVC: UIViewController {
     let collumnNumber = 10
     let lineNumber = 10
+    var wordsList = [String]()
+    var logicPositioning: LogicPositioning!
 
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.layer.cornerRadius = 8
         return collectionView
     }()
 
@@ -23,15 +26,19 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        WordsDataAccess.getWords(index: 0) { wordsList in
+            self.wordsList = wordsList
+            self.logicPositioning = LogicPositioning(numLines: self.lineNumber, numCollumns: self.collumnNumber, wordsList: self.wordsList)
+        }
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: lettreCellIdentifier)
+        collectionView.register(LetterCollectionViewCell.self, forCellWithReuseIdentifier: lettreCellIdentifier)
         setupViews()
     }
 
     func setupViews() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .white
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
