@@ -9,16 +9,26 @@
 import UIKit
 
 class GameVC: UIViewController {
-    let collumnNumber = 10
-    let lineNumber = 10
+    let collumnNumber = 12
+    let lineNumber = 12
     var wordsList = [String]()
     var logicPositioning: LogicPositioning!
+    var startSelected: Int = -1
+    var endSelected: Int = -1
+    var wordColor = [String: UIColor]()
 
     let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.isUserInteractionEnabled = false
+
         collectionView.layer.cornerRadius = 8
+        collectionView.layer.shadowColor = UIColor.black.cgColor
+        collectionView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        collectionView.layer.shadowRadius = 4.0
+        collectionView.layer.shadowOpacity = 0.4
+        collectionView.layer.masksToBounds = false
         return collectionView
     }()
 
@@ -26,6 +36,7 @@ class GameVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         WordsDataAccess.getWords(index: 0) { wordsList in
             self.wordsList = wordsList
             self.logicPositioning = LogicPositioning(numLines: self.lineNumber, numCollumns: self.collumnNumber, wordsList: self.wordsList)
@@ -43,5 +54,43 @@ class GameVC: UIViewController {
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
+        guard let location = touches.first?.location(in: collectionView) else {
+            return
+        }
+        if let indexPath = collectionView.indexPathForItem(at: location) {
+            startSelected = indexPath.item
+            endSelected = indexPath.item
+            collectionView.reloadData()
+        }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
+        guard let location = touches.first?.location(in: collectionView) else {
+            return
+        }
+        if let indexPath = collectionView.indexPathForItem(at: location) {
+            endSelected = indexPath.item
+            if let word = logicPositioning.wordsListRanges.first(where: { (_, value) -> Bool in
+                value.0 == startSelected && value.1 == endSelected
+            }) {
+                print("✅ word found :", word.key)
+                logicPositioning.wordsFound[word.key] = word.value
+                logicPositioning.wordsListRanges.removeValue(forKey: word.key)
+                wordColor[word.key] = UIColor.random()
+                if logicPositioning.wordsListRanges.count == 0 {
+                    print("Well done !")
+                }
+            }
+            collectionView.reloadData()
+        }
+    }
+
+    override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
+        startSelected = -1
+        endSelected = -1
+        collectionView.reloadData()
     }
 }

@@ -18,7 +18,9 @@ class LogicPositioning {
     let numCollumns: Int
     let wordsList: [String]
     var wordsGrid: [String]
+    var wordsListRanges = [String: (Int, Int)]()
     let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    var wordsFound = [String: (Int, Int)]()
 
     init(numLines: Int, numCollumns: Int, wordsList: [String]) {
         freeCell = [Bool](repeating: true, count: numLines * numCollumns)
@@ -67,7 +69,7 @@ class LogicPositioning {
                 computedY = y + i
             case .diagoLeft:
                 computedX = x - i
-                computedY = y - i
+                computedY = y + i
             }
             if computedX >= numCollumns || computedY >= numLines || computedX < 0 || computedY < 0 || !freeCell[computedX + computedY * numCollumns] {
                 return false
@@ -91,10 +93,31 @@ class LogicPositioning {
                 computedY = y + i
             case .diagoLeft:
                 computedX = x - i
-                computedY = y - i
+                computedY = y + i
             }
+            wordsListRanges[word] = (index, computedX + computedY * numLines)
             freeCell[computedX + computedY * numCollumns] = false
             wordsGrid[computedX + computedY * numLines] = String(word[word.index(word.startIndex, offsetBy: i)]).capitalized
         }
+    }
+
+    func isInRange(index: Int, start: Int, end: Int) -> Bool {
+        if start == -1 || end == -1 { return false }
+        let (x, y) = indexToXY(index: index)
+        let (begX, begY) = indexToXY(index: min(start, end))
+        let (endX, endY) = indexToXY(index: max(start, end))
+        if x >= begX, x <= endX, y == begY, y == endY {
+            return true
+        }
+        if y >= begY, y <= endY, x == begX, x == endX {
+            return true
+        }
+        if y >= begY, y <= endY, x >= begX, x <= endX, x - begX == y - begY, endX - x == endY - y {
+            return true
+        }
+        if y >= begY, y <= endY, x >= endX, x <= begX, x - begX == -(y - begY), endX - x == -(endY - y) {
+            return true
+        }
+        return false
     }
 }

@@ -15,6 +15,7 @@
 		FBEEEFE12287CA0000E7F29A /* WordsDataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE02287CA0000E7F29A /* WordsDataAccess.swift */; };
 		FBEEEFE32287CB7900E7F29A /* LetterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE22287CB7900E7F29A /* LetterCollectionViewCell.swift */; };
 		FBEEEFE62287FDC000E7F29A /* LogicPositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE52287FDC000E7F29A /* LogicPositioning.swift */; };
+		FBEEEFE92288376300E7F29A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE82288376300E7F29A /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FBEEEFE02287CA0000E7F29A /* WordsDataAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsDataAccess.swift; sourceTree = "<group>"; };
 		FBEEEFE22287CB7900E7F29A /* LetterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBEEEFE52287FDC000E7F29A /* LogicPositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicPositioning.swift; sourceTree = "<group>"; };
+		FBEEEFE82288376300E7F29A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEEEFE52287FDC000E7F29A /* LogicPositioning.swift */,
+				FBEEEFE82288376300E7F29A /* Utils.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 				FBEEEFE32287CB7900E7F29A /* LetterCollectionViewCell.swift in Sources */,
 				FBEEEFD92287981F00E7F29A /* GameVC.swift in Sources */,
 				FBEEEFE62287FDC000E7F29A /* LogicPositioning.swift in Sources */,
+				FBEEEFE92288376300E7F29A /* Utils.swift in Sources */,
 				FBEEEFDC22879FF500E7F29A /* GameVC+CollectionView.swift in Sources */,
 				FBEEEFC72287965100E7F29A /* AppDelegate.swift in Sources */,
 				FBEEEFE12287CA0000E7F29A /* WordsDataAccess.swift in Sources */,

@@ -19,15 +19,21 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: lettreCellIdentifier, for: indexPath) as! LetterCollectionViewCell
-        if !logicPositioning.freeCell[indexPath.item] {
+
+        cell.backgroundColor = .white
+        if logicPositioning.isInRange(index: indexPath.item, start: startSelected, end: endSelected) {
             cell.backgroundColor = .orange
+        }
+        for word in logicPositioning.wordsFound {
+            if logicPositioning.isInRange(index: indexPath.item, start: word.value.0, end: word.value.1) {
+                cell.backgroundColor = wordColor[word.key]
+            }
         }
         cell.letterLabel.text = logicPositioning.wordsGrid[indexPath.item]
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        collectionView.layoutIfNeeded()
         let w = collectionView.bounds.width / CGFloat(collumnNumber)
         let h = collectionView.bounds.height / CGFloat(lineNumber)
         return CGSize(width: w, height: h)
