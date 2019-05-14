@@ -16,8 +16,9 @@ class GameVC: UIViewController {
     var startSelected: Int = -1
     var endSelected: Int = -1
     var wordColor = [String: UIColor]()
+    let selection = UISelectionFeedbackGenerator()
 
-    let collectionView: UICollectionView = {
+    let boardCollectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.clipsToBounds = true
@@ -33,7 +34,20 @@ class GameVC: UIViewController {
         return collectionView
     }()
 
+    let wordsCollectionView: UICollectionView = {
+        let flowLayout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.clipsToBounds = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.isUserInteractionEnabled = false
+        return collectionView
+    }()
+
+    var boardCollectionViewConstraints = [NSLayoutConstraint]()
+    var wordsCollectionViewConstraints = [NSLayoutConstraint]()
+
     let lettreCellIdentifier = "lettreCellIdentifier"
+    let wordCellIdentifier = "wordCellIdentifier"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,62 +56,83 @@ class GameVC: UIViewController {
             self.wordsList = wordsList
             self.logicPositioning = LogicPositioning(numLines: self.lineNumber, numCollumns: self.collumnNumber, wordsList: self.wordsList)
         }
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(LetterCollectionViewCell.self, forCellWithReuseIdentifier: lettreCellIdentifier)
+        boardCollectionView.dataSource = self
+        boardCollectionView.delegate = self
+        boardCollectionView.register(LetterCollectionViewCell.self, forCellWithReuseIdentifier: lettreCellIdentifier)
+
+        wordsCollectionView.delegate = self
+        wordsCollectionView.dataSource = self
+        wordsCollectionView.register(wordCollectionViewCell.self, forCellWithReuseIdentifier: wordCellIdentifier)
         setupViews()
     }
 
     func setupViews() {
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
-        collectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor).isActive = true
-        collectionView.layoutIfNeeded()
-        let spacingX = collectionView.bounds.width - floor(collectionView.bounds.width / CGFloat(collumnNumber)) * CGFloat(collumnNumber)
-        let spacingY = collectionView.bounds.height - floor(collectionView.bounds.height / CGFloat(lineNumber)) * CGFloat(lineNumber)
-        collectionView.contentInset = UIEdgeInsets(top: spacingY / 2, left: spacingX / 2, bottom: spacingY / 2, right: spacingX / 2)
-        collectionView.reloadData()
-        print(spacingX, spacingY)
+        view.addSubview(boardCollectionView)
+        boardCollectionView.backgroundColor = .white
+
+        view.addSubview(wordsCollectionView)
+        wordsCollectionView.backgroundColor = .white
+
+        setupConstraints(UIApplication.shared.statusBarOrientation.isLandscape)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
-        guard let location = touches.first?.location(in: collectionView) else {
-            return
-        }
-        if let indexPath = collectionView.indexPathForItem(at: location) {
-            startSelected = indexPath.item
-            endSelected = indexPath.item
-            collectionView.reloadData()
-        }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
-        guard let location = touches.first?.location(in: collectionView) else {
-            return
-        }
-        if let indexPath = collectionView.indexPathForItem(at: location) {
-            endSelected = indexPath.item
-            if let word = logicPositioning.wordsListRanges.first(where: { (_, value) -> Bool in
-                value.0 == startSelected && value.1 == endSelected
-            }) {
-                print("✅ word found :", word.key)
-                logicPositioning.wordsFound[word.key] = word.value
-                logicPositioning.wordsListRanges.removeValue(forKey: word.key)
-                wordColor[word.key] = UIColor.random()
-                if logicPositioning.wordsListRanges.count == 0 {
-                    print("Well done !")
-                }
+    func setupConstraints(_ isLandscape: Bool) {
+        NSLayoutConstraint.deactivate(boardCollectionViewConstraints)
+        NSLayoutConstraint.deactivate(wordsCollectionViewConstraints)
+        view.layoutIfNeeded()
+        view.layoutSubviews()
+        if isLandscape {
+            boardCollectionViewConstraints = [
+                boardCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
+                boardCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+                boardCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+                boardCollectionView.heightAnchor.constraint(equalTo: boardCollectionView.widthAnchor),
+            ]
+            boardCollectionViewConstraints.forEach { const in
+                const.priority = UILayoutPriority(rawValue: 10)
             }
-            collectionView.reloadData()
+            boardCollectionViewConstraints.last?.priority = UILayoutPriority(rawValue: 2)
+
+            wordsCollectionViewConstraints = [
+                wordsCollectionView.leftAnchor.constraint(equalTo: boardCollectionView.rightAnchor, constant: 28),
+                wordsCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -28),
+                wordsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+                wordsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            ]
+        } else {
+            boardCollectionViewConstraints = [
+                boardCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8),
+                boardCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -8),
+                boardCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+                boardCollectionView.heightAnchor.constraint(equalTo: boardCollectionView.widthAnchor),
+            ]
+            wordsCollectionViewConstraints = [
+                wordsCollectionView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 28),
+                wordsCollectionView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -28),
+                wordsCollectionView.topAnchor.constraint(equalTo: boardCollectionView.bottomAnchor, constant: 12),
+                wordsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            ]
+            wordsCollectionViewConstraints.forEach { const in
+                const.priority = UILayoutPriority(rawValue: 10)
+            }
+            wordsCollectionViewConstraints.last?.priority = UILayoutPriority(rawValue: 2)
         }
+
+        NSLayoutConstraint.activate(boardCollectionViewConstraints)
+        NSLayoutConstraint.activate(wordsCollectionViewConstraints)
+        view.layoutIfNeeded()
+        view.layoutSubviews()
     }
 
-    override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
-        startSelected = -1
-        endSelected = -1
-        collectionView.reloadData()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let spacingX = boardCollectionView.bounds.width - floor(boardCollectionView.bounds.width / CGFloat(collumnNumber)) * CGFloat(collumnNumber)
+        let spacingY = boardCollectionView.bounds.height - floor(boardCollectionView.bounds.height / CGFloat(lineNumber)) * CGFloat(lineNumber)
+        boardCollectionView.contentInset = UIEdgeInsets(top: spacingY / 2, left: spacingX / 2, bottom: spacingY / 2, right: spacingX / 2)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setupConstraints(UIDevice.current.orientation.isLandscape)
     }
 }

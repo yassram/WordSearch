@@ -16,6 +16,8 @@
 		FBEEEFE32287CB7900E7F29A /* LetterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE22287CB7900E7F29A /* LetterCollectionViewCell.swift */; };
 		FBEEEFE62287FDC000E7F29A /* LogicPositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE52287FDC000E7F29A /* LogicPositioning.swift */; };
 		FBEEEFE92288376300E7F29A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE82288376300E7F29A /* Utils.swift */; };
+		FBEEEFEB2288DF2900E7F29A /* wordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFEA2288DF2900E7F29A /* wordCollectionViewCell.swift */; };
+		FBEEEFED228A682400E7F29A /* GameVC+UserInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFEC228A682400E7F29A /* GameVC+UserInteractions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		FBEEEFE22287CB7900E7F29A /* LetterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBEEEFE52287FDC000E7F29A /* LogicPositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicPositioning.swift; sourceTree = "<group>"; };
 		FBEEEFE82288376300E7F29A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		FBEEEFEA2288DF2900E7F29A /* wordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wordCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBEEEFEC228A682400E7F29A /* GameVC+UserInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameVC+UserInteractions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			children = (
 				FBEEEFD82287981F00E7F29A /* GameVC.swift */,
 				FBEEEFDB22879FF500E7F29A /* GameVC+CollectionView.swift */,
+				FBEEEFEC228A682400E7F29A /* GameVC+UserInteractions.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEEEFE22287CB7900E7F29A /* LetterCollectionViewCell.swift */,
+				FBEEEFEA2288DF2900E7F29A /* wordCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -186,8 +192,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBEEEFED228A682400E7F29A /* GameVC+UserInteractions.swift in Sources */,
 				FBEEEFE32287CB7900E7F29A /* LetterCollectionViewCell.swift in Sources */,
 				FBEEEFD92287981F00E7F29A /* GameVC.swift in Sources */,
+				FBEEEFEB2288DF2900E7F29A /* wordCollectionViewCell.swift in Sources */,
 				FBEEEFE62287FDC000E7F29A /* LogicPositioning.swift in Sources */,
 				FBEEEFE92288376300E7F29A /* Utils.swift in Sources */,
 				FBEEEFDC22879FF500E7F29A /* GameVC+CollectionView.swift in Sources */,
@@ -333,6 +341,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UFGY99PZ97;
 				INFOPLIST_FILE = WordSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,6 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UFGY99PZ97;
 				INFOPLIST_FILE = WordSearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
