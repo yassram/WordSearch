@@ -34,6 +34,7 @@ class LogicPositioning {
         self.wordsList = wordsList.shuffled()
         self.wordsList.insert(contentsOf: ["Swift", "Kotlin", "ObjectiveC", "Variable", "Java", "Mobile"].shuffled(), at: 0)
         var skip = false
+        print("ℹ️ The LogicPositioning will try to add as many as possible words from data.json to the board")
         for word in self.wordsList {
             skip = false
             for index in (0 ..< numLines * numCollumns).shuffled() {
