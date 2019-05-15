@@ -18,6 +18,8 @@
 		FBEEEFE92288376300E7F29A /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFE82288376300E7F29A /* Utils.swift */; };
 		FBEEEFEB2288DF2900E7F29A /* wordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFEA2288DF2900E7F29A /* wordCollectionViewCell.swift */; };
 		FBEEEFED228A682400E7F29A /* GameVC+UserInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFEC228A682400E7F29A /* GameVC+UserInteractions.swift */; };
+		FBEEEFF0228A7A0300E7F29A /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = FBEEEFEF228A784400E7F29A /* data.json */; };
+		FBEEEFF2228B802500E7F29A /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEEEFF1228B802500E7F29A /* CustomAlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		FBEEEFE82288376300E7F29A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FBEEEFEA2288DF2900E7F29A /* wordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wordCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBEEEFEC228A682400E7F29A /* GameVC+UserInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameVC+UserInteractions.swift"; sourceTree = "<group>"; };
+		FBEEEFEF228A784400E7F29A /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		FBEEEFF1228B802500E7F29A /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		FBEEEFC52287965100E7F29A /* WordSearch */ = {
 			isa = PBXGroup;
 			children = (
+				FBEEEFEE228A782200E7F29A /* Data */,
 				FBEEEFE42287FC9600E7F29A /* Business */,
 				FBEEEFDF2287C9C500E7F29A /* DataAccess */,
 				FBEEEFC62287965100E7F29A /* AppDelegate.swift */,
@@ -92,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				FBEEEFDE2287B6F700E7F29A /* Cells */,
+				FBEEEFF1228B802500E7F29A /* CustomAlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -120,6 +126,14 @@
 				FBEEEFE82288376300E7F29A /* Utils.swift */,
 			);
 			path = Business;
+			sourceTree = "<group>";
+		};
+		FBEEEFEE228A782200E7F29A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FBEEEFEF228A784400E7F29A /* data.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +196,7 @@
 			files = (
 				FBEEEFD12287965400E7F29A /* LaunchScreen.storyboard in Resources */,
 				FBEEEFCE2287965400E7F29A /* Assets.xcassets in Resources */,
+				FBEEEFF0228A7A0300E7F29A /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBEEEFF2228B802500E7F29A /* CustomAlertView.swift in Sources */,
 				FBEEEFED228A682400E7F29A /* GameVC+UserInteractions.swift in Sources */,
 				FBEEEFE32287CB7900E7F29A /* LetterCollectionViewCell.swift in Sources */,
 				FBEEEFD92287981F00E7F29A /* GameVC.swift in Sources */,
