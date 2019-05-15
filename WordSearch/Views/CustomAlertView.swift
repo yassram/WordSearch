@@ -13,6 +13,47 @@ class CustomAlertView: UIView {
     let vc: GameVC
     var action: Selector?
 
+    func createWinParticles() {
+        let particleEmitter = CAEmitterLayer()
+
+        particleEmitter.emitterPosition = CGPoint(x: parentView.center.x, y: -50)
+        particleEmitter.emitterShape = .line
+        particleEmitter.emitterSize = CGSize(width: parentView.frame.size.width, height: 1)
+
+        let redT = makeEmitterCell(color: UIColor(red: 1.00, green: 0.10, blue: 0.37, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+        let greenT = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+        let blueT = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+
+        let redP = makeEmitterCell(color: UIColor(red: 1.00, green: 0.10, blue: 0.37, alpha: 1.00), image: UIImage(named: "polygon")?.withRenderingMode(.alwaysTemplate))
+        let greenP = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "polygon")?.withRenderingMode(.alwaysTemplate))
+        let blueP = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "polygon")?.withRenderingMode(.alwaysTemplate))
+
+        let redS = makeEmitterCell(color: UIColor(red: 1.00, green: 0.10, blue: 0.37, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+        let greenS = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+        let blueS = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+
+        particleEmitter.emitterCells = [redS, greenS, blueS, redT, greenT, blueT, redP, greenP, blueP]
+        layer.insertSublayer(particleEmitter, below: messageView.layer)
+    }
+
+    func makeEmitterCell(color: UIColor, image: UIImage?) -> CAEmitterCell {
+        let cell = CAEmitterCell()
+        cell.birthRate = 3
+        cell.lifetime = 7.0
+        cell.lifetimeRange = 0
+        cell.velocity = 200
+        cell.velocityRange = 50
+        cell.emissionLongitude = CGFloat.pi
+        cell.emissionRange = CGFloat.pi / 4
+        cell.spin = 2
+        cell.spinRange = 3
+        cell.scaleRange = 0.7
+        cell.scaleSpeed = -0.05
+        cell.contents = image?.cgImage
+        cell.color = color.cgColor
+        return cell
+    }
+
     init(parentView: UIView, vc: GameVC) {
         self.parentView = parentView
         self.vc = vc
@@ -62,6 +103,7 @@ class CustomAlertView: UIView {
             self.action = action
         }
         show(title: "🎉", message: "Well done!", actionName: "Play again!", action: nil)
+        createWinParticles()
     }
 
     func show(title: String, message: String, actionName: String, action: Selector?) {
