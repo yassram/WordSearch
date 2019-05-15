@@ -1,6 +1,13 @@
 # WordSearch : Shopify Mobile Developer Intern Challenge
 
-# Todo
+# Preview
+<p align="center">
+<img src="Preview/P0.png" width="400">
+<img src="Preview/P1.png" width="400">
+<img src="Preview/L1.png" height="400">
+</p>
+
+
 ## Requirements
 * [x] A word search mobile app.
 * [x] The word search should have at least a 10x10 grid. (**has 12x12 grid**)
@@ -18,3 +25,4 @@
 * [x] Displaying score (**nb found / nb words**)
 * [x] Timer score (**nb found / nb words**)
 * [x] Words' list with dashed found words.
+
