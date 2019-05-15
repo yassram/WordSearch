@@ -11,7 +11,7 @@ import UIKit
 extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         if collectionView == boardCollectionView {
-            return collumnNumber * lineNumber
+            return wordsList.count > 0 ? collumnNumber * lineNumber : 0
         } else if collectionView == wordsCollectionView {
             return wordsList.count
         }
@@ -29,12 +29,14 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
             if logicPositioning.isInRange(index: indexPath.item, start: startSelected, end: endSelected) {
                 cell.backgroundColor = .orange
             }
+
             for word in logicPositioning.wordsFound {
                 if logicPositioning.isInRange(index: indexPath.item, start: word.value.0, end: word.value.1) {
                     cell.backgroundColor = wordColor[word.key]
                 }
             }
             cell.letterLabel.text = logicPositioning.wordsGrid[indexPath.item]
+
             return cell
         }
 
