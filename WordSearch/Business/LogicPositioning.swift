@@ -16,7 +16,7 @@ class LogicPositioning {
     var freeCell: [Bool]
     let numLines: Int
     let numCollumns: Int
-    let wordsList: [String]
+    var wordsList: [String]
     var wordsGrid: [String]
     var wordsListRanges = [String: (Int, Int)]()
     let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -32,6 +32,7 @@ class LogicPositioning {
         self.numLines = numLines
         self.numCollumns = numCollumns
         self.wordsList = wordsList.shuffled()
+        self.wordsList.insert(contentsOf: ["Swift", "Kotlin", "ObjectiveC", "Variable", "Java", "Mobile"].shuffled(), at: 0)
         var skip = false
         for word in self.wordsList {
             skip = false
@@ -47,6 +48,9 @@ class LogicPositioning {
             }
             if skip { continue }
             print("⚠️ Couldn't place:", word)
+            self.wordsList.removeAll { (w) -> Bool in
+                w == word
+            }
         }
     }
 
