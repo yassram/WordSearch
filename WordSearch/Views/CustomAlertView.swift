@@ -28,9 +28,9 @@ class CustomAlertView: UIView {
         let greenP = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "polygon")?.withRenderingMode(.alwaysTemplate))
         let blueP = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "polygon")?.withRenderingMode(.alwaysTemplate))
 
-        let redS = makeEmitterCell(color: UIColor(red: 1.00, green: 0.10, blue: 0.37, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
-        let greenS = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
-        let blueS = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "triangle")?.withRenderingMode(.alwaysTemplate))
+        let redS = makeEmitterCell(color: UIColor(red: 1.00, green: 0.10, blue: 0.37, alpha: 1.00), image: UIImage(named: "star")?.withRenderingMode(.alwaysTemplate))
+        let greenS = makeEmitterCell(color: UIColor(red: 0.29, green: 0.95, blue: 0.63, alpha: 1.00), image: UIImage(named: "star")?.withRenderingMode(.alwaysTemplate))
+        let blueS = makeEmitterCell(color: UIColor(red: 0.00, green: 0.54, blue: 1.00, alpha: 1.00), image: UIImage(named: "star")?.withRenderingMode(.alwaysTemplate))
 
         particleEmitter.emitterCells = [redS, greenS, blueS, redT, greenT, blueT, redP, greenP, blueP]
         layer.insertSublayer(particleEmitter, below: messageView.layer)
