@@ -24,7 +24,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By : Yassir RAMDANI    -    Mobile Developer Intern challenge (Shopify)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd9-tp-TUV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By : Yassir RAMDANI    -    Mobile Developer Intern challenge (Shopify)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd9-tp-TUV">
                                 <rect key="frame" x="17" y="650" width="341" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="ZKT-n9-m6o"/>
