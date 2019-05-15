@@ -36,14 +36,18 @@ extension GameVC {
                 wordsCollectionView.reloadData()
                 wordColor[word.key] = UIColor.random()
                 if logicPositioning.wordsListRanges.count == 0 {
-                    print("Well done !")
+                    print("Well done! : All words have been found")
+                    let v = CustomAlertView(parentView: view, vc: self)
+                    v.showSucess(action: #selector(startGame))
+                    timer.invalidate()
                 }
+                scoreLabel.text = "\(logicPositioning.wordsFound.count) / \(wordsList.count)"
             }
             boardCollectionView.reloadData()
         }
     }
 
-    override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with _: UIEvent?) {
         startSelected = -1
         endSelected = -1
         boardCollectionView.reloadData()
